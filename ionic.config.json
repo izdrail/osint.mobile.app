@@ -1,0 +1,7 @@
+{
+  "name": "mobile-osint-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
