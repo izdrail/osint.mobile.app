@@ -4,11 +4,23 @@ import { RouteRecordRaw } from 'vue-router';
 const routes: Array<RouteRecordRaw> = [
   {
     path: '',
-    redirect: '/folder/Inbox'
+    redirect: '/domain-investigation'
   },
   {
-    path: '/folder/:id',
-    component: () => import ('../views/FolderPage.vue')
+    path: '/domain-investigation',
+    component: () => import ('../views/domain-investigation.vue')
+  },
+  {
+    path: '/ip-investigation',
+    component: () => import ('../views/ip-investigation.vue')
+  },
+  {
+    path: '/phone-investigation',
+    component: () => import ('../views/phone-investigation.vue')
+  },
+  {
+    path: '/email-investigation',
+    component: () => import ('../views/email-investigation.vue')
   }
 ]
 
