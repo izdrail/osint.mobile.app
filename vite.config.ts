@@ -19,5 +19,15 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom'
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://osint.izdrail.com',
+        changeOrigin: true,
+        followRedirects: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
   }
 })

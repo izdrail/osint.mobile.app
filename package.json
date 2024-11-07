@@ -5,21 +5,28 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "test:e2e": "cypress run",
     "test:unit": "vitest",
     "lint": "eslint ."
   },
   "dependencies": {
+    "@capacitor/android": "^6.1.2",
     "@capacitor/app": "6.0.1",
     "@capacitor/core": "6.1.2",
     "@capacitor/haptics": "6.0.1",
+    "@capacitor/http": "^0.0.2",
     "@capacitor/keyboard": "6.0.2",
+    "@capacitor/preferences": "^6.0.2",
     "@capacitor/status-bar": "6.0.1",
+    "@ionic/storage": "^4.0.0",
     "@ionic/vue": "^8.0.0",
     "@ionic/vue-router": "^8.0.0",
+    "axios": "^1.7.7",
+    "cordova-sqlite-storage": "^6.1.0",
     "ionicons": "^7.0.0",
+    "localforage-cordovasqlitedriver": "^1.8.0",
     "vue": "^3.3.0",
     "vue-router": "^4.2.0"
   },
@@ -39,5 +46,7 @@
     "vitest": "^0.34.6",
     "vue-tsc": "^2.0.22"
   },
-  "description": "An Ionic project"
+  "description": "A mobile OSINT application for Android to help prevent cybercrime.",
+  "author": "Stefan Izdrail <stefan@izdrail.com>",
+  "license": "MIT"
 }
