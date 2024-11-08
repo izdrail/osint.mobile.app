@@ -1,25 +1,30 @@
 <template>
   <ion-page>
-    <ion-header :translucent="true">
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-menu-button color="primary"></ion-menu-button>
-        </ion-buttons>
-        <ion-title>{{ $route.params.id }}</ion-title>
-      </ion-toolbar>
-    </ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button color="primary"></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        Email Investigation
+      </ion-title>
+    </ion-toolbar>
+
+
 
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">{{ $route.params.id }}</ion-title>
-        </ion-toolbar>
-      </ion-header>
 
       <div id="container">
         Add Form to start
       </div>
     </ion-content>
+
+    <ion-footer>
+      <ion-toolbar>
+        <ion-title>
+          Built for <a href="https://hackathon.developer.orange.com/">Orange Hackathon {{ new Date().getFullYear() }}</a>
+        </ion-title>
+      </ion-toolbar>
+    </ion-footer>
   </ion-page>
 </template>
 

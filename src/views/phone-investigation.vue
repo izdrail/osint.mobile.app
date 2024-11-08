@@ -47,7 +47,7 @@
                 <ion-item v-for="(scan, index) in scans" :key="index" :href="'phone-investigation/' + scan.scanID">
                   <ion-label>
                     <h2>View  - Scan ID: {{ scan.scanID }}</h2>
-                    <p>Phone Number: {{ scan.name }}</p>
+                     <p>Phone Number: {{ scan.name }}</p>
                   </ion-label>
                 </ion-item>
 

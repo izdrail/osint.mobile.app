@@ -23,7 +23,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://osint.izdrail.com',
+        target: 'http://127.0.0.1:5001',
         changeOrigin: true,
         followRedirects: true,
         rewrite: (path) => path.replace(/^\/api/, '')

@@ -5,79 +5,72 @@
         <ion-buttons slot="start">
           <ion-menu-button color="primary"></ion-menu-button>
         </ion-buttons>
-        <ion-title>Phone Investigation</ion-title>
+        <ion-title>
+          Scan Summary {{ route.params.scanID }}
+        </ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">{{ $route.params.id }}</ion-title>
-        </ion-toolbar>
-      </ion-header>
-
       <ion-grid>
+        <ion-card v-for="(item, index) in scanSummary" :key="index">
+          <ion-card-content>
+            <ion-label>
+              <h3>{{ item[1] }}</h3>
+              <p><strong>Scan ID:</strong> {{ item[0] }}</p>
+              <p><strong>Timestamp:</strong> {{ item[2] }}</p>
+              <p><strong>Status:</strong> {{ item[5] }}</p>
+              <p><strong>Other Details:</strong> Finished: {{ item[3] }}, Pending: {{ item[4] }}</p>
+            </ion-label>
+            <ion-button @click="viewEventResults(item[0], route.params.scanID)" expand="block" fill="outline">Download</ion-button>
 
-        <!-- Form  -->
-        <ion-row>
-          <div id="container">
-Welcome to the Phone Investigation Result page
-          </div>
-        </ion-row>
+          </ion-card-content>
+        </ion-card>
 
-
-
+        <!-- Loading or No Data -->
+        <ion-col>
+          <p v-if="loading">Loading scan summary...</p>
+          <p v-else>No scan results found.</p>
+        </ion-col>
       </ion-grid>
-
     </ion-content>
-
-    <ion-footer>
-      <ion-toolbar>
-        <ion-title>
-          Built for <a href="https://hackathon.developer.orange.com/">Orange Hackathon {{ new Date().getFullYear() }}</a>
-        </ion-title>
-      </ion-toolbar>
-    </ion-footer>
   </ion-page>
 </template>
+
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
 import { ref, onMounted } from 'vue';
-import ScanManagerService from '../services/ScanManagerService';
+import { useRoute } from 'vue-router';
+import ScanManagerService from '@/services/ScanManagerService'; // Import the service
 
-const route = useRoute();
-const scanID = route.params.scanID; // Access the scanID from the route parameters
+const route = useRoute(); // Access route parameters
 
-console.log('Scan ID:', scanID);
-// You can now use `scanID` to fetch data or display information about the scan
+const scanSummary = ref<any[]>([]); // Holds the scan summary data
+const loading = ref(true);
 
+const fetchScanSummary = async () => {
+  loading.value = true;
+  const scanID = route.params.scanID as string; // Get scanID from route params
 
-const resulsts = ref([]);
-
-// Load past scans when the component is mounted
-const loadResults = async () => {
-
-  const response =  await ScanManagerService.getScanSummary(scanID, 'type');
-
-  console.log(response);
-
-  resulsts.value = response;
+  try {
+    // Fetch scan summary data using scanID
+    const response = await ScanManagerService.getScanSummary(scanID, 'type');
+    scanSummary.value = response;
+  } catch (error) {
+    console.error('Error fetching scan summary:', error);
+  } finally {
+    loading.value = false;
+  }
 };
 
-onMounted(async () => {
-  await loadResults();
-});
+const viewEventResults = async (event:string, scanID: string) => {
 
-// Call the getScanSummary method when the user clicks on "Get Summary"
-// const getScanSummary = async (scanID: string, type: string) => {
-//   loading.value = true;
-//   try {
-//     const summary = await ScanManagerService.getScanSummary(scanID, type);
-//     console.log('Scan Summary:', summary);
-//   } catch (error) {
-//     console.error('Error fetching summary:', error);
-//   } finally {
-//     loading.value = false;
-//   }
-// };
+  const response = await ScanManagerService.getEventResults(scanID, event);
+  console.log(response);
+
+};
+
+// Fetch scan summary on mount
+onMounted(() => {
+  fetchScanSummary();
+});
 </script>

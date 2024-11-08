@@ -40,7 +40,6 @@ import {
   mailOutline,
     callOutline,
     callSharp,
-    logoChrome,
 
 } from 'ionicons/icons';
 
@@ -53,12 +52,6 @@ const appPages = [
 
     iosIcon: callOutline,
     mdIcon: callSharp,
-  },
-  {
-    title: 'Domain Investigation',
-    url: '/domain-investigation',
-    iosIcon: logoChrome,
-    mdIcon: logoChrome,
   },
   {
     title: 'Email Investigation',
